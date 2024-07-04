@@ -1,7 +1,12 @@
 from collections import deque
 from typing import List, Optional
 
-DEBUG = True
+DEBUG = False
+TEST_BFS_TRAVERSAL = False
+TEST_LEVEL_ORDER = False
+TEST_RETURN_SHORTEST_PATH = False
+TEST_SYMMETRY_CHECK = True
+TEST_QUEUE_OPERATIONS = False
 
 
 class TreeNode:
@@ -35,6 +40,30 @@ def level_order(root):
                 queue.append(node.right)
         result.append(current_level)
     return result
+
+
+def symmetry_check(root: Optional[TreeNode]) -> bool:
+    if not root:
+        return True
+    queue = deque([root])
+    while queue:
+        current_level = []
+        for _ in range(len(queue)):  # taking out the elements in that level
+            node = dequeue(queue)
+            if node:
+                current_level.append(node.val)
+                enqueue(queue, node.left)
+                enqueue(queue, node.right)
+            else:
+                current_level.append(None)
+        l = 0
+        r = len(current_level)-1
+        while l < r:
+            if current_level[l] != current_level[r]:
+                return False
+            l += 1
+            r += -1
+    return True
 
 
 def enqueue(queue, element):
@@ -105,33 +134,4 @@ def return_shortest_path(graph: dict, start: str, target: str) -> List[str]:
 
 
 if __name__ == "__main__":
-    queue2 = deque()
-    root = TreeNode(1)
-    root.left = TreeNode(2)
-    root.right = TreeNode(3)
-    root.left.left = TreeNode(4)
-    root.left.right = TreeNode(5)
-    root.right.right = TreeNode(6)
-    print("Testing enqueue: ", enqueue(queue2, 10))
-    print("Testing dequeue: ", dequeue(queue2))
-    print("Testing enqueue: ", enqueue(queue2, 20))
-    print("Testing peek: ", peek(queue2))
-
-    print("----------------2-----------------")
-    print("Testing level_order: ", level_order(root))
-
-    graph = {
-        "A": ["B", "C"],
-        "B": ["A", "D", "E"],
-        "C": ["A", "F"],
-        "D": ["B"],
-        "E": ["B", "F"],
-        "F": ["C", "E"],
-    }
-    print("----------------3-----------------")
-    print("Testing return_bfs_traversal: ", return_bfs_traversal(graph, "A"))
-
-    print(
-        "----------------3-----------------\nTesting return_shortest_path: ",
-        return_shortest_path(graph, "A", "F"),
-    )
+    pass
