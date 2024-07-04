@@ -57,7 +57,7 @@ def symmetry_check(root: Optional[TreeNode]) -> bool:
             else:
                 current_level.append(None)
         l = 0
-        r = len(current_level)-1
+        r = len(current_level) - 1
         while l < r:
             if current_level[l] != current_level[r]:
                 return False

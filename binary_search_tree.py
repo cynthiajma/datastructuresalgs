@@ -7,7 +7,7 @@ class TreeNode:
         self.left = left
         self.right = right
 
-    def insert(self, node: Optional['TreeNode'], key: int) -> Optional["TreeNode"]:
+    def insert(self, node: Optional["TreeNode"], key: int) -> Optional["TreeNode"]:
         # Tree is empty
         if node is None:
             return TreeNode(key)
@@ -16,10 +16,11 @@ class TreeNode:
             node.left = self.insert(node.left, key)
         elif key > node.val:
             node.right = self.insert(node.right, key)
-        return node # return the unchanged node pointer
+        return node  # return the unchanged node pointer
 
-
-    def search_in_bst(self, root: Optional['TreeNode'], search_value: int) -> Optional["TreeNode"]:
+    def search_in_bst(
+        self, root: Optional["TreeNode"], search_value: int
+    ) -> Optional["TreeNode"]:
         # insert the node as the root if no root exists, or if the node ALREADY exists.
         if root is None or root.val == search_value:
             return root
@@ -28,8 +29,7 @@ class TreeNode:
         else:
             return self.search_in_bst(root.left, search_value)
 
-
-    def inorder_traversal(self, root: Optional['TreeNode']) -> None:
+    def inorder_traversal(self, root: Optional["TreeNode"]) -> None:
         if root.left:
             self.inorder_traversal(root.left)
         if root is not None:
@@ -37,8 +37,7 @@ class TreeNode:
         if root.right:
             self.inorder_traversal(root.right)
 
-
-    def invert(self, node: Optional['TreeNode']) -> None:
+    def invert(self, node: Optional["TreeNode"]) -> None:
         # recursive traversal, and swap the right and left subtrees for each node.
         if not node:
             return
@@ -48,7 +47,7 @@ class TreeNode:
             self.invert(node.right)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     root = None
     tree = TreeNode()
     root = tree.insert(root, 50)
@@ -72,14 +71,3 @@ if __name__ == '__main__':
     tree.invert(root)
     print("inverted:")
     print(tree.inorder_traversal(root))
-
-
-
-
-
-
-
-
-
-
-
