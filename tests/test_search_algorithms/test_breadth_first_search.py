@@ -1,9 +1,12 @@
 import unittest
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
+
+
+from search_algorithms.breadth_first_search import *
 from collections import deque
-from search_algorithms.breadth_first_search import (
-    TreeNode, level_order, symmetry_check, enqueue, dequeue, peek,
-    return_bfs_traversal, return_shortest_path
-)
+
 
 
 class TestBreadthFirstSearch(unittest.TestCase):
